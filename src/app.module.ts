@@ -1,12 +1,14 @@
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { Module } from '@nestjs/common';
 import { join } from 'path';
 
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { AppResolver } from './app.resolver';
+import { AppService } from './app.service';
+import { BookModule } from './book/book.module';
+import { TypeOrmModule } from '@nestjs/typeorm/dist/typeorm.module';
+import { Book } from './book/book.entity';
 
 @Module({
   imports: [
@@ -15,10 +17,11 @@ import { AppResolver } from './app.resolver';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       context: ({ req }) => ({ req }),
     }),
+    BookModule,
     TypeOrmModule.forRoot({
       type: 'sqlite',
       database: 'database.sqlite',
-      autoLoadEntities: true,
+      entities: [Book],
       synchronize: true,
     }),
   ],

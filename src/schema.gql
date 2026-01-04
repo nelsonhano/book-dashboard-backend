@@ -2,6 +2,18 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Book {
+  id: Int!
+  name: String!
+  description: String!
+}
+
 type Query {
   hello: String!
+  books: [Book!]!
+}
+
+type Mutation {
+  createBook(name: String!, description: String!): Book!
+  deleteBook(id: Int!): Boolean!
 }
