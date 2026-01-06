@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 export class BookService {
   constructor(
     @InjectRepository(Book)
-    private repo: Repository<Book>,
+    private readonly repo: Repository<Book>,
   ) {}
 
   findAll() {

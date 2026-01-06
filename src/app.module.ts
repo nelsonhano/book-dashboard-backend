@@ -3,11 +3,11 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { Module } from '@nestjs/common';
 import { join } from 'path';
 
+import { TypeOrmModule } from '@nestjs/typeorm/dist/typeorm.module';
 import { AppController } from './app.controller';
+import { BookModule } from './book/book.module';
 import { AppResolver } from './app.resolver';
 import { AppService } from './app.service';
-import { BookModule } from './book/book.module';
-import { TypeOrmModule } from '@nestjs/typeorm/dist/typeorm.module';
 import { Book } from './book/book.entity';
 
 @Module({
@@ -15,6 +15,7 @@ import { Book } from './book/book.entity';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      sortSchema: true,
       context: ({ req }) => ({ req }),
     }),
     BookModule,
