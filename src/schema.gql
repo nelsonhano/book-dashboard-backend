@@ -3,17 +3,17 @@
 # ------------------------------------------------------
 
 type Book {
+  description: String!
   id: Int!
   name: String!
-  description: String!
-}
-
-type Query {
-  hello: String!
-  books: [Book!]!
 }
 
 type Mutation {
-  createBook(name: String!, description: String!): Book!
+  createBook(description: String!, name: String!): Book!
   deleteBook(id: Int!): Boolean!
+}
+
+type Query {
+  books: [Book!]!
+  hello: String!
 }
