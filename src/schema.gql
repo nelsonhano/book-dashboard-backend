@@ -4,16 +4,38 @@
 
 type Book {
   description: String!
-  id: Int!
+  id: ID!
   name: String!
 }
 
+input CreateBookInput {
+  description: String!
+  name: String!
+}
+
+type DeleteBookResponse {
+  message: String!
+  success: Boolean!
+}
+
 type Mutation {
-  createBook(description: String!, name: String!): Book!
-  deleteBook(id: Int!): Boolean!
+  createBook(input: CreateBookInput!): Book!
+  deleteBook(id: ID!): DeleteBookResponse!
+  updateBook(id: ID!, input: UpdateBookInput!): UpdateBookResponse!
 }
 
 type Query {
   books: [Book!]!
   hello: String!
+}
+
+input UpdateBookInput {
+  description: String
+  name: String
+}
+
+type UpdateBookResponse {
+  affected: ID!
+  message: String!
+  success: Boolean!
 }
